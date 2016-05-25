@@ -12,6 +12,7 @@ if($reg_user->is_logged_in()!="")
 if(isset($_POST['btn-signup']))
 {
 	$uname = trim($_POST['txtuname']);
+	$sisi = trim($_POST['txtsisi']);
 	$email = trim($_POST['txtemail']);
 	$upass = trim($_POST['txtpass']);
 	$rpass = trim($_POST['txtpass1']);
@@ -33,7 +34,7 @@ if(isset($_POST['btn-signup']))
 	}
 	else
 	{
-		if($reg_user->register($uname,$email,$upass,$code))
+		if($reg_user->register($uname,$sisi,$email,$upass,$code))
 		{			
 			$id = $reg_user->lasdID();		
 			$key = base64_encode($id);
@@ -42,10 +43,10 @@ if(isset($_POST['btn-signup']))
 			$message = "					
 						Сайн байна уу  $uname,
 						<br /><br />
-						Оюутны карьерийн систем<br/>
+						Өгөгдлийн нууцлал, аюулгүй байдал систем<br/>
 						Та бүртгэлээ баталгаажууулахын тулд доорх хаяг дээр дарна уу !!!<br/>
 						<br /><br />
-						<a href='http://localhost/web/verify.php?id=$id&code=$code'>идэвхжүүлэх</a>
+						<a href='http://localhost/diplomweb/verify.php?id=$id&code=$code'>идэвхжүүлэх</a>
 						<br /><br />
 						Баярлалаа.,";
 			//$message = utf8_decode($message);
@@ -82,12 +83,13 @@ if(isset($_POST['btn-signup']))
     <![endif]-->
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
-  <body id="login">
+  <body id="login" class="index">
     <div class="container">
 				<?php if(isset($msg)) echo $msg;  ?>
       <form class="form-signin" method="post">
         <h2 class="form-signin-heading">Бүртгүүлэх</h2><hr />
         <input type="text" class="input-block-level" placeholder="Хэрэглэгчийн нэр" name="txtuname" required />
+<!--        <input type="text" class="input-block-level" placeholder="Сиси хаяг" name="txtsisi" required />-->
         <input type="email" class="input-block-level" placeholder="И-майл хаяг" name="txtemail" required />
         <input type="password" class="input-block-level" placeholder="Нууц үг" name="txtpass" required />
 		<input type="password" class="input-block-level" placeholder="Нууц үг давтах" name="txtpass1" required />

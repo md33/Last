@@ -14,6 +14,10 @@ if(isset($_POST['btn-login']))
 	$email = trim($_POST['txtemail']);
 	$upass = trim($_POST['txtupass']);
 	
+  $word = array("'","/","include","connect","requre","or","select","union","from","drop","table","java","script");
+  foreach ($word as $color) {
+    # code...
+  }
 	if($user_login->login($email,$upass))
 	{
 		$user_login->redirect('home.php');
@@ -24,6 +28,21 @@ if(isset($_POST['btn-login']))
 <!DOCTYPE html>
 <html>
   <head>
+    <script>
+      function checkPassword(){
+        if($('#password').val().length !=0)
+        {
+          var pattern= /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
+          if(!pattern.test($('#password').val()))
+          {
+            $('#password').addClass('form-group has-error').removeClass('form-group has-success');    
+          }else
+          {
+            $('#password').addClass('form-group has-success').removeClass('form-group );
+          }
+        }
+      }
+    </script>
     <title>Нэвтрэх</title>
     <!-- Bootstrap -->
 	
@@ -38,7 +57,7 @@ if(isset($_POST['btn-login']))
     <![endif]-->
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
-  <body id="login">
+  <body id="login" class="index">
     <div class="container">
 		<?php 
 		if(isset($_GET['inactive']))
@@ -67,13 +86,14 @@ if(isset($_POST['btn-login']))
         <input type="email" class="input-block-level" placeholder="И-майл хаяг" name="txtemail"/>
         <input type="password" class="input-block-level" placeholder="Нууц үг" name="txtupass" />
      	<hr />
-        <button class="btn btn-large btn-primary" type="submit" name="btn-login">Нэвтрэх</button>
-        <a href="signup.php" style="float:right;" class="btn btn-large">Бүртгүүлэх</a><hr />
+        <button class="btn btn-large btn-primary "  type="submit" name="btn-login">Нэвтрэх</button>
+        <a href="signup.php" style="float:right;" class="btn btn-large btn-primary ">Бүртгүүлэх</a>
+        <hr />
         <a href="fpass.php">Нууц үг мартсан? </a>
       </form>
 
     </div> <!-- /container -->
-    <script src="bootstrap/js/jquery-1.9.1.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> 
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>

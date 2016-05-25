@@ -1,6 +1,7 @@
 <?php
 require_once 'dbconfig.php';
-class USER
+require_once 'interface.php';
+class USER implements Templates
 {
 	private $conn;
 	
@@ -23,14 +24,15 @@ class USER
 		return $stmt;
 	}
 	
-	public function register($uname,$email,$upass,$code)
+	public function register($uname,$sisi,$email,$upass,$code)
 	{
 		try
 		{							
 			$password = md5($upass);
-			$stmt = $this->conn->prepare("INSERT INTO tbl_users(userName,userEmail,userPass,tokenCode) 
-			                                             VALUES(:user_name, :user_mail, :user_pass, :active_code)");
+			$stmt = $this->conn->prepare("INSERT INTO tbl_users(userName,sisi_id,userEmail,userPass,tokenCode) 
+			                                             VALUES(:user_name,:sisi, :user_mail, :user_pass, :active_code)");
 			$stmt->bindparam(":user_name",$uname);
+			$stmt->bindparam(":sisi",$sisi);
 			$stmt->bindparam(":user_mail",$email);
 			$stmt->bindparam(":user_pass",$password);
 			$stmt->bindparam(":active_code",$code);
